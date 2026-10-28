@@ -1,32 +1,78 @@
-# React + TypeScript + Vite
+**BookRadar** is a Chrome extension designed to help readers track book pre-orders and upcoming release dates.
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Built with React, TypeScript, Vite, and Chrome Extensions API (Manifest V3).
 
-Currently, two official plugins are available:
+## Features (Planned)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Save books and their pre-order dates.
+- Track upcoming book releases.
+- Mark books as ordered or not ordered.
+- Edit and delete saved books.
+- Sort books by upcoming pre-order dates.
+- Receive browser notifications when pre-orders become available.
+- Store book data locally using Chrome Storage API.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- TypeScript
+- Vite
+- Chrome Extensions API (Manifest V3)
+- CSS
 
-## Expanding the Oxlint configuration
+## Getting Started
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+### Installation
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+1. Clone the repository:
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+   ```bash
+   git clone https://github.com/tetianashcherbyna/book-radar.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd book-radar
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Build the extension:
+
+   ```bash
+   npm run build
+   ```
+
+### Load into Chrome
+
+1. Open `chrome://extensions`.
+2. Enable **Developer mode**.
+3. Click **Load unpacked**.
+4. Select the `dist` folder.
+
+## Project Status
+
+**MVP 1.0 — In Development**
+
+The initial React, TypeScript, and Manifest V3 setup is complete. The extension can be loaded into Chrome and displays a basic popup.
+
+## Roadmap
+
+- [x] Initialize React + TypeScript + Vite
+- [x] Configure Manifest V3
+- [x] Load extension into Chrome
+- [ ] Implement book data types and local storage
+- [ ] Build popup interface
+- [ ] Implement CRUD operations
+- [ ] Add sorting and order status
+- [ ] Implement notifications
+- [ ] Test and prepare for release
+
+## Author
+
+Tetiana Shcherbyna
