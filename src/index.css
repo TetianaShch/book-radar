@@ -1,8 +1,31 @@
+:root {
+  --font-body: "Inter", sans-serif;
+
+  --color-text: #29232a;
+  --color-muted: #746b72;
+  --color-border: #dfd3d7;
+  --color-surface: #ffffff;
+  --color-background: #faf7f2;
+
+  --color-primary: #722f46;
+  --color-primary-hover: #5b2338;
+  --color-primary-soft: #f5e7eb;
+  --color-primary-soft-hover: #ecd5dd;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  width: 440px;
+  padding: 20px;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+p {
+  margin: 0;
 }
