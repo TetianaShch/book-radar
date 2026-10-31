@@ -1,0 +1,10 @@
+function BookList() {
+  return (
+    <div>
+      <h2>Book List</h2>
+      {/* Render the list of books here */}
+    </div>
+  );
+}
+
+export default BookList;

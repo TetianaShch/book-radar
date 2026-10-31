@@ -4,11 +4,14 @@ import type { BookPreorder } from "../../types/bookPreorder";
 import { saveBookPreorder } from "../../services/storage";
 import css from "./BookForm.module.css";
 
-function BookForm() {
+type BookFormProps = {
+  onSave: () => void;
+};
+
+function BookForm({ onSave }: BookFormProps) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [preorderDate, setPreorderDate] = useState("");
-  const [releaseDate, setReleaseDate] = useState("");
   const [url, setUrl] = useState("");
   const [isOrdered, setIsOrdered] = useState(false);
 
@@ -34,10 +37,9 @@ function BookForm() {
       title: title.trim(),
       author: author.trim(),
       preorderDate: preorderDate || null,
-      releaseDate: releaseDate || null,
       url: url.trim(),
       createdAt: new Date().toISOString(),
-      isOrdered,
+      status: isOrdered ? "preordered" : "saved",
     };
     const success = await saveBookPreorder(newBook);
     console.log("Book saved:", success);
@@ -45,8 +47,8 @@ function BookForm() {
       setTitle("");
       setAuthor("");
       setPreorderDate("");
-      setReleaseDate("");
       setIsOrdered(false);
+      onSave();
     }
   };
 
@@ -88,18 +90,6 @@ function BookForm() {
         name="preorderDate"
         value={preorderDate}
         onChange={(e) => setPreorderDate(e.target.value)}
-      />
-
-      <label className={css.label} htmlFor="releaseDate">
-        Дата виходу книжки
-      </label>
-      <input
-        className={css.input}
-        type="date"
-        id="releaseDate"
-        name="releaseDate"
-        value={releaseDate}
-        onChange={(e) => setReleaseDate(e.target.value)}
       />
 
       <label className={css.label} htmlFor="url">
