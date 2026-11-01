@@ -25,3 +25,18 @@
   font-size: 0.875rem;
   color: var(--color-muted);
 }
+.backButton {
+  padding: 0;
+  margin-bottom: 16px;
+  border: none;
+  background: transparent;
+  color: var(--color-primary);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  text-decoration: underline;
+}

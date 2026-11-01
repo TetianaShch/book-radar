@@ -8,11 +8,23 @@ function App() {
   const [currentView, setCurrentView] = useState<"form" | "list">("form");
   return (
     <div>
-      <h1 className="title">BookRadar</h1>
+      <header className="app-header">
+        <h1 className="title">BookRadar</h1>
+
+        {currentView === "form" && (
+          <button
+            className="saved-button"
+            type="button"
+            onClick={() => setCurrentView("list")}
+          >
+            Збережені
+          </button>
+        )}
+      </header>
       {currentView === "form" ? (
         <BookForm onSave={() => setCurrentView("list")} />
       ) : (
-        <BookList />
+        <BookList onBack={() => setCurrentView("form")} />
       )}
     </div>
   );

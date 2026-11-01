@@ -13,7 +13,6 @@ function BookForm({ onSave }: BookFormProps) {
   const [author, setAuthor] = useState("");
   const [preorderDate, setPreorderDate] = useState("");
   const [url, setUrl] = useState("");
-  const [isOrdered, setIsOrdered] = useState(false);
 
   useEffect(() => {
     const getCurrentTab = async () => {
@@ -39,7 +38,7 @@ function BookForm({ onSave }: BookFormProps) {
       preorderDate: preorderDate || null,
       url: url.trim(),
       createdAt: new Date().toISOString(),
-      status: isOrdered ? "preordered" : "saved",
+      status: "saved",
     };
     const success = await saveBookPreorder(newBook);
     console.log("Book saved:", success);
@@ -47,14 +46,12 @@ function BookForm({ onSave }: BookFormProps) {
       setTitle("");
       setAuthor("");
       setPreorderDate("");
-      setIsOrdered(false);
       onSave();
     }
   };
 
   return (
     <form className={css.form} onSubmit={handleSubmit}>
-      <h2 className={css.title}>Додати книжку</h2>
       <label className={css.label} htmlFor="title">
         Назва книжки
       </label>
@@ -81,7 +78,7 @@ function BookForm({ onSave }: BookFormProps) {
       />
 
       <label className={css.label} htmlFor="preorderDate">
-        Дата передзамовлення
+        Дата дії передзамовлення
       </label>
       <input
         className={css.input}
@@ -103,18 +100,6 @@ function BookForm({ onSave }: BookFormProps) {
         value={url}
         onChange={(e) => setUrl(e.target.value)}
       />
-
-      <label className={css.checkboxLabel} htmlFor="isOrdered">
-        <input
-          className={css.checkbox}
-          type="checkbox"
-          id="isOrdered"
-          name="isOrdered"
-          checked={isOrdered}
-          onChange={(e) => setIsOrdered(e.target.checked)}
-        />
-        Уже передзамовлено
-      </label>
 
       <button className={css.button} type="submit">
         Зберегти книжку

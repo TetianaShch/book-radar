@@ -3,7 +3,11 @@ import type { BookPreorder } from "../../types/bookPreorder";
 import { getBookPreorders } from "../../services/storage";
 import css from "./BookList.module.css";
 
-function BookList() {
+type BookListProps = {
+  onBack: () => void;
+};
+
+function BookList({ onBack }: BookListProps) {
   const [books, setBooks] = useState<BookPreorder[]>([]);
 
   useEffect(() => {
@@ -17,7 +21,9 @@ function BookList() {
 
   return (
     <div>
-      <h2 className={css.title}>Book List</h2>
+      <button type="button" className={css.backButton} onClick={onBack}>
+        ← До форми
+      </button>
       <p className={css.count}>Збережено книжок: {books.length}</p>
       <ul className={css.list}>
         {books.map((book) => (
