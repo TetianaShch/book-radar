@@ -10,6 +10,7 @@ type BookListProps = {
 function BookList({ onBack }: BookListProps) {
   const [books, setBooks] = useState<BookPreorder[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
     const loadBooks = async () => {
@@ -20,9 +21,28 @@ function BookList({ onBack }: BookListProps) {
     void loadBooks();
   }, []);
 
-  const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  const filteredBooks = books.filter((book) => {
+    const matchesSearch = book.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+
+    const matchesStatus =
+      statusFilter === "all" || book.status === statusFilter;
+
+    return matchesSearch && matchesStatus;
+  });
+
+  const statusLabels = {
+    saved: "Збережено",
+    preordered: "Передзамовлено",
+    completed: "Отримано",
+  };
+  const sortedBooks = [...filteredBooks].sort((a, b) => {
+    if (a.preorderDate && b.preorderDate) return 0;
+    if (!a.preorderDate) return 1;
+    if (!b.preorderDate) return -1;
+    return a.preorderDate.localeCompare(b.preorderDate);
+  });
 
   return (
     <div>
@@ -37,18 +57,31 @@ function BookList({ onBack }: BookListProps) {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
+      <select
+        className={css.statusSelect}
+        value={statusFilter}
+        onChange={(e) => setStatusFilter(e.target.value)}
+      >
+        <option value="all">Усі</option>
+        <option value="saved">Збережені</option>
+        <option value="preordered">Передзамовлені</option>
+        <option value="completed">Отримані</option>
+      </select>
       {filteredBooks.length > 0 ? (
         <ul className={css.list}>
-          {filteredBooks.map((book) => (
+          {sortedBooks.map((book) => (
             <li key={book.id} className={css.item}>
-              {book.title}
+              <span className={css.bookTitle}>{book.title}</span>
+              <span className={css.bookStatus}>
+                {statusLabels[book.status]}
+              </span>
             </li>
           ))}
         </ul>
       ) : books.length === 0 ? (
         <p>Ви ще не зберегли жодної книжки</p>
       ) : (
-        <p>Книжок за вашим запитом не знайдено</p>
+        <p>Книжок не знайдено</p>
       )}
     </div>
   );
