@@ -13,6 +13,7 @@ function BookForm({ onSave }: BookFormProps) {
   const [author, setAuthor] = useState("");
   const [preorderDate, setPreorderDate] = useState("");
   const [url, setUrl] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const getCurrentTab = async () => {
@@ -20,9 +21,12 @@ function BookForm({ onSave }: BookFormProps) {
         active: true,
         currentWindow: true,
       });
-
       if (tab?.url) {
         setUrl(tab.url);
+      }
+
+      if (tab?.title) {
+        setTitle(tab.title);
       }
     };
 
@@ -41,12 +45,13 @@ function BookForm({ onSave }: BookFormProps) {
       status: "saved",
     };
     const success = await saveBookPreorder(newBook);
-    console.log("Book saved:", success);
     if (success) {
       setTitle("");
       setAuthor("");
       setPreorderDate("");
       onSave();
+    } else {
+      setErrorMessage("Ця книга вже збережена");
     }
   };
 
@@ -100,7 +105,7 @@ function BookForm({ onSave }: BookFormProps) {
         value={url}
         onChange={(e) => setUrl(e.target.value)}
       />
-
+      {errorMessage && <p className={css.errorMessage}>{errorMessage}</p>}
       <button className={css.button} type="submit">
         Зберегти книжку
       </button>

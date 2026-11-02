@@ -9,7 +9,11 @@ export async function saveBookPreorder(book: BookPreorder): Promise<boolean> {
 
     try {
         const bookPreorders = await getBookPreorders();
-        if (bookPreorders.some((b) => b.id === book.id)) {
+        if (
+            bookPreorders.some(
+                (b) => b.id === book.id || (book.url && b.url === book.url)
+            )
+        ) {
             return false;
         }
         bookPreorders.push(book);
