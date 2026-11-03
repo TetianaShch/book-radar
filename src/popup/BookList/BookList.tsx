@@ -1,3 +1,4 @@
+import searchIcon from "../../assets/icons/search.svg";
 import { useState, useEffect } from "react";
 import type { BookPreorder } from "../../types/bookPreorder";
 import { getBookPreorders } from "../../services/storage";
@@ -10,6 +11,7 @@ type BookListProps = {
 function BookList({ onBack }: BookListProps) {
   const [books, setBooks] = useState<BookPreorder[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
@@ -38,7 +40,7 @@ function BookList({ onBack }: BookListProps) {
     completed: "Отримано",
   };
   const sortedBooks = [...filteredBooks].sort((a, b) => {
-    if (a.preorderDate && b.preorderDate) return 0;
+    if (!a.preorderDate && !b.preorderDate) return 0;
     if (!a.preorderDate) return 1;
     if (!b.preorderDate) return -1;
     return a.preorderDate.localeCompare(b.preorderDate);
@@ -49,14 +51,38 @@ function BookList({ onBack }: BookListProps) {
       <button type="button" className={css.backButton} onClick={onBack}>
         ← До форми
       </button>
-      <p className={css.count}>Збережено книжок: {books.length}</p>
-      <input
-        className={css.searchInput}
-        type="search"
-        placeholder="Пошук за назвою"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
+      <div className={css.listHeader}>
+        <div className={css.searchWrapper}>
+          <button
+            type="button"
+            className={css.searchButton}
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
+            aria-label="Показати пошук"
+          >
+            <img src={searchIcon} alt="" />
+          </button>
+
+          {isSearchOpen && (
+            <input
+              className={css.searchInput}
+              type="search"
+              placeholder="Пошук за назвою"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          )}
+        </div>
+      </div>
+      {isSearchOpen && (
+        <input
+          className={css.searchInput}
+          type="search"
+          placeholder="Пошук за назвою"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      )}
+
       <select
         className={css.statusSelect}
         value={statusFilter}
