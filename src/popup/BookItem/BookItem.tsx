@@ -1,4 +1,5 @@
 import type { BookPreorder } from "../../types/bookPreorder";
+import { openBookUrl } from "../../services/tabs";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import externalLinkIcon from "../../assets/icons/external-link.svg";
 import pencilIcon from "../../assets/icons/pencil.svg";
@@ -38,7 +39,12 @@ function BookItem({ book }: BookItemProps) {
         </div>
       )}
       <div className={css.actions}>
-        <button type="button" aria-label="Відкрити магазин">
+        <button
+          type="button"
+          aria-label="Відкрити магазин"
+          onClick={() => openBookUrl(book.url)}
+          disabled={!book.url}
+        >
           <img src={externalLinkIcon} alt="" />
         </button>
 
