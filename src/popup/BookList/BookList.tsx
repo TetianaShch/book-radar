@@ -2,6 +2,7 @@ import searchIcon from "../../assets/icons/search.svg";
 import { useState, useEffect } from "react";
 import type { BookPreorder } from "../../types/bookPreorder";
 import { getBookPreorders } from "../../services/storage";
+import BookItem from "../BookItem/BookItem";
 import css from "./BookList.module.css";
 
 type BookListProps = {
@@ -34,11 +35,6 @@ function BookList({ onBack }: BookListProps) {
     return matchesSearch && matchesStatus;
   });
 
-  const statusLabels = {
-    saved: "Збережено",
-    preordered: "Передзамовлено",
-    completed: "Отримано",
-  };
   const sortedBooks = [...filteredBooks].sort((a, b) => {
     if (!a.preorderDate && !b.preorderDate) return 0;
     if (!a.preorderDate) return 1;
@@ -96,12 +92,7 @@ function BookList({ onBack }: BookListProps) {
       {filteredBooks.length > 0 ? (
         <ul className={css.list}>
           {sortedBooks.map((book) => (
-            <li key={book.id} className={css.item}>
-              <span className={css.bookTitle}>{book.title}</span>
-              <span className={css.bookStatus}>
-                {statusLabels[book.status]}
-              </span>
-            </li>
+            <BookItem key={book.id} book={book} />
           ))}
         </ul>
       ) : books.length === 0 ? (

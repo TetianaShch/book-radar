@@ -1,0 +1,64 @@
+.item {
+  list-style: none;
+  padding: 16px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.bookInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.status {
+  flex-shrink: 0;
+  padding: 4px 8px;
+  background-color: var(--color-border);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: var(--color-text);
+}
+
+.date img {
+  width: 18px;
+  height: 18px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.actions img {
+  width: 20px;
+  height: 20px;
+}
