@@ -24,6 +24,15 @@ function Modal({ isOpen, children, onClose }: ModalProps) {
 
   return (
     <dialog className={css.modal} ref={modalRef} onClose={onClose}>
+      <button
+        type="button"
+        className={css.closeButton}
+        aria-label="Закрити вікно"
+        onClick={onClose}
+      >
+        ×
+      </button>
+
       <div className={css.modalContent}>{children}</div>
     </dialog>
   );

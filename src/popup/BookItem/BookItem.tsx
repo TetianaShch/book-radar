@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { BookPreorder } from "../../types/bookPreorder";
 import { openBookUrl } from "../../services/tabs";
 import Modal from "../Modal/Modal";
+import EditBookForm from "../EditBookForm/EditBookForm";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import externalLinkIcon from "../../assets/icons/external-link.svg";
 import pencilIcon from "../../assets/icons/pencil.svg";
@@ -66,6 +67,7 @@ function BookItem({ book }: BookItemProps) {
       </div>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <h2>Редагування книжки</h2>
+        <EditBookForm book={book} onClose={() => setIsModalOpen(false)} />
       </Modal>
     </li>
   );
