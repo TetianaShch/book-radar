@@ -1,5 +1,7 @@
+import { useState } from "react";
 import type { BookPreorder } from "../../types/bookPreorder";
 import { openBookUrl } from "../../services/tabs";
+import Modal from "../Modal/Modal";
 import calendarIcon from "../../assets/icons/calendar.svg";
 import externalLinkIcon from "../../assets/icons/external-link.svg";
 import pencilIcon from "../../assets/icons/pencil.svg";
@@ -20,6 +22,8 @@ function BookItem({ book }: BookItemProps) {
   const formattedDate = book.preorderDate
     ? book.preorderDate.split("-").reverse().join(".")
     : null;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <li className={css.item}>
@@ -48,7 +52,11 @@ function BookItem({ book }: BookItemProps) {
           <img src={externalLinkIcon} alt="" />
         </button>
 
-        <button type="button" aria-label="Редагувати книжку">
+        <button
+          type="button"
+          aria-label="Редагувати книжку"
+          onClick={() => setIsModalOpen(true)}
+        >
           <img src={pencilIcon} alt="" />
         </button>
 
@@ -56,6 +64,9 @@ function BookItem({ book }: BookItemProps) {
           <img src={trashIcon} alt="" />
         </button>
       </div>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h2>Редагування книжки</h2>
+      </Modal>
     </li>
   );
 }

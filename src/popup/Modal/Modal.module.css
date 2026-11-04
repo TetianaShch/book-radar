@@ -1,0 +1,25 @@
+.modal {
+  width: calc(100% - 32px);
+  max-width: 420px;
+  max-height: 90vh;
+  margin: auto;
+  padding: 24px;
+
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+}
+
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
