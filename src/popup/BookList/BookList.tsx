@@ -1,4 +1,5 @@
 import searchIcon from "../../assets/icons/search.svg";
+import filterIcon from "../../assets/icons/filter.svg";
 import { useState, useEffect } from "react";
 import type { BookPreorder } from "../../types/bookPreorder";
 import { getBookPreorders } from "../../services/storage";
@@ -13,6 +14,7 @@ function BookList({ onBack }: BookListProps) {
   const [books, setBooks] = useState<BookPreorder[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
@@ -44,51 +46,64 @@ function BookList({ onBack }: BookListProps) {
 
   return (
     <div>
-      <button type="button" className={css.backButton} onClick={onBack}>
-        ← До форми
-      </button>
       <div className={css.listHeader}>
-        <div className={css.searchWrapper}>
+        <button type="button" className={css.backButton} onClick={onBack}>
+          ← До форми
+        </button>
+
+        <div className={css.headerActions}>
+          <div className={css.searchWrapper}>
+            <button
+              type="button"
+              className={css.searchButton}
+              onClick={() => {
+                setIsSearchOpen(!isSearchOpen);
+                setIsFilterOpen(false);
+              }}
+              aria-label="Показати пошук"
+            >
+              <img src={searchIcon} alt="" />
+            </button>
+
+            {isSearchOpen && (
+              <input
+                className={css.searchInput}
+                type="search"
+                placeholder="Пошук за назвою"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            )}
+          </div>
+
           <button
             type="button"
-            className={css.searchButton}
-            onClick={() => setIsSearchOpen(!isSearchOpen)}
-            aria-label="Показати пошук"
+            className={css.filterButton}
+            onClick={() => {
+              setIsFilterOpen(!isFilterOpen);
+              setIsSearchOpen(false);
+            }}
+            aria-label="Показати фільтр"
+            aria-expanded={isFilterOpen}
           >
-            <img src={searchIcon} alt="" />
+            <img src={filterIcon} alt="" />
           </button>
 
-          {isSearchOpen && (
-            <input
-              className={css.searchInput}
-              type="search"
-              placeholder="Пошук за назвою"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+          {isFilterOpen && (
+            <select
+              className={css.statusSelect}
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              aria-label="Фільтр за статусом"
+            >
+              <option value="all">Усі</option>
+              <option value="saved">Збережені</option>
+              <option value="preordered">Передзамовлені</option>
+              <option value="completed">Отримані</option>
+            </select>
           )}
         </div>
       </div>
-      {isSearchOpen && (
-        <input
-          className={css.searchInput}
-          type="search"
-          placeholder="Пошук за назвою"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      )}
-
-      <select
-        className={css.statusSelect}
-        value={statusFilter}
-        onChange={(e) => setStatusFilter(e.target.value)}
-      >
-        <option value="all">Усі</option>
-        <option value="saved">Збережені</option>
-        <option value="preordered">Передзамовлені</option>
-        <option value="completed">Отримані</option>
-      </select>
       {filteredBooks.length > 0 ? (
         <ul className={css.list}>
           {sortedBooks.map((book) => (
