@@ -13,9 +13,10 @@ import css from "./BookItem.module.css";
 type BookItemProps = {
   book: BookPreorder;
   onDelete: () => void;
+  onUpdate: (updatedBook: BookPreorder) => void;
 };
 
-function BookItem({ book, onDelete }: BookItemProps) {
+function BookItem({ book, onDelete, onUpdate }: BookItemProps) {
   const statusLabels = {
     saved: "Збережено",
     preordered: "Передзамовлено",
@@ -80,7 +81,11 @@ function BookItem({ book, onDelete }: BookItemProps) {
       </div>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <h2>Редагування книжки</h2>
-        <EditBookForm book={book} onClose={() => setIsModalOpen(false)} />
+        <EditBookForm
+          book={book}
+          onClose={() => setIsModalOpen(false)}
+          onUpdate={onUpdate}
+        />
       </Modal>
       <Modal
         isOpen={isDeleteModalOpen}

@@ -110,6 +110,13 @@ function BookList({ onBack }: BookListProps) {
             <BookItem
               key={book.id}
               book={book}
+              onUpdate={(updatedBook: BookPreorder) => {
+                setBooks((prevBooks) =>
+                  prevBooks.map((item) =>
+                    item.id === updatedBook.id ? updatedBook : item,
+                  ),
+                );
+              }}
               onDelete={() => {
                 setBooks((prevBooks) =>
                   prevBooks.filter((item) => item.id !== book.id),

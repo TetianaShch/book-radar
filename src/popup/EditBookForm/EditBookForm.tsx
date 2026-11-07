@@ -7,9 +7,10 @@ import css from "./EditBookForm.module.css";
 type EditBookFormProps = {
   book: BookPreorder;
   onClose: () => void;
+  onUpdate: (updatedBook: BookPreorder) => void;
 };
 
-function EditBookForm({ book, onClose }: EditBookFormProps) {
+function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
   const [url, setUrl] = useState(book.url || "");
@@ -32,6 +33,7 @@ function EditBookForm({ book, onClose }: EditBookFormProps) {
 
     if (success) {
       onClose();
+      onUpdate(updatedBook);
     }
   };
 
