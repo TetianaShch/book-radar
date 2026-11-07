@@ -62,3 +62,26 @@
   width: 20px;
   height: 20px;
 }
+
+.deleteActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.deleteActions button {
+  padding: 8px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.deleteActions button:last-child {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}

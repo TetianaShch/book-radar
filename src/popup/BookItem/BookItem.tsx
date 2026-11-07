@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { BookPreorder } from "../../types/bookPreorder";
 import { openBookUrl } from "../../services/tabs";
+import { deleteBookPreorder } from "../../services/storage";
 import Modal from "../Modal/Modal";
 import EditBookForm from "../EditBookForm/EditBookForm";
 import calendarIcon from "../../assets/icons/calendar.svg";
@@ -11,9 +12,10 @@ import css from "./BookItem.module.css";
 
 type BookItemProps = {
   book: BookPreorder;
+  onDelete: () => void;
 };
 
-function BookItem({ book }: BookItemProps) {
+function BookItem({ book, onDelete }: BookItemProps) {
   const statusLabels = {
     saved: "Збережено",
     preordered: "Передзамовлено",
@@ -25,6 +27,13 @@ function BookItem({ book }: BookItemProps) {
     : null;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const handleDelete = async () => {
+    await deleteBookPreorder(book.id);
+    setIsDeleteModalOpen(false);
+    onDelete();
+  };
 
   return (
     <li className={css.item}>
@@ -61,13 +70,33 @@ function BookItem({ book }: BookItemProps) {
           <img src={pencilIcon} alt="" />
         </button>
 
-        <button type="button" aria-label="Видалити книжку">
+        <button
+          type="button"
+          aria-label="Видалити книжку"
+          onClick={() => setIsDeleteModalOpen(true)}
+        >
           <img src={trashIcon} alt="" />
         </button>
       </div>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <h2>Редагування книжки</h2>
         <EditBookForm book={book} onClose={() => setIsModalOpen(false)} />
+      </Modal>
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+      >
+        <h2>Видалити книжку?</h2>
+        <p>Ви впевнені, що хочете видалити «{book.title}»?</p>
+        <div className={css.deleteActions}>
+          <button type="button" onClick={() => setIsDeleteModalOpen(false)}>
+            Скасувати
+          </button>
+
+          <button type="button" onClick={handleDelete}>
+            Видалити
+          </button>
+        </div>
       </Modal>
     </li>
   );

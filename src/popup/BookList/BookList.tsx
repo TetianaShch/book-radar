@@ -107,7 +107,15 @@ function BookList({ onBack }: BookListProps) {
       {filteredBooks.length > 0 ? (
         <ul className={css.list}>
           {sortedBooks.map((book) => (
-            <BookItem key={book.id} book={book} />
+            <BookItem
+              key={book.id}
+              book={book}
+              onDelete={() => {
+                setBooks((prevBooks) =>
+                  prevBooks.filter((item) => item.id !== book.id),
+                );
+              }}
+            />
           ))}
         </ul>
       ) : books.length === 0 ? (
