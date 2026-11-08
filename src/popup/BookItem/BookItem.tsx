@@ -43,8 +43,17 @@ function BookItem({ book, onDelete, onUpdate }: BookItemProps) {
     <li className={css.item}>
       <div className={css.header}>
         <div className={css.bookInfo}>
-          <h3>{book.title}</h3>
-          <p>{book.author}</p>
+          {book.imgUrl && (
+            <img
+              className={css.bookCover}
+              src={book.imgUrl}
+              alt={`Обкладинка ${book.title}`}
+            />
+          )}
+          <div className={css.bookDetails}>
+            <h3>{book.title}</h3>
+            <p>{book.author}</p>
+          </div>
         </div>
 
         <span className={css.status}>{statusLabels[book.status]}</span>

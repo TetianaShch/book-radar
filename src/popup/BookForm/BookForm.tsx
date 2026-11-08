@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { SubmitEvent } from "react";
 import type { BookPreorder } from "../../types/bookPreorder";
-import { saveBookPreorder } from "../../services/storage";
+import { saveBookPreorder, getBookImage } from "../../services/storage";
 import css from "./BookForm.module.css";
 
 type BookFormProps = {
@@ -36,6 +36,9 @@ function BookForm({ onSave }: BookFormProps) {
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage("");
+
+    const imgUrl = await getBookImage();
+
     const newBook: BookPreorder = {
       id: crypto.randomUUID(),
       title: title.trim(),
@@ -44,7 +47,9 @@ function BookForm({ onSave }: BookFormProps) {
       url: url.trim(),
       createdAt: new Date().toISOString(),
       status: "saved",
+      imgUrl,
     };
+
     const result = await saveBookPreorder(newBook);
     if (result === "success") {
       setTitle("");

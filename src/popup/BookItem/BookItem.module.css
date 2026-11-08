@@ -14,8 +14,23 @@
 }
 
 .bookInfo {
+  display: flex;
+  gap: 12px;
   flex: 1;
   min-width: 0;
+}
+
+.bookDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.bookCover {
+  width: 70px;
+  height: 100px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 .status {
