@@ -1,15 +1,14 @@
-**BookRadar** is a Chrome extension designed to help readers track book pre-orders and upcoming release dates.
+**BookRadar** is a Chrome extension designed to help readers track book pre-orders and manage their book wishlists.
 
 Built with React, TypeScript, Vite, and Chrome Extensions API (Manifest V3).
 
-## Features (Planned)
+## Features
 
-- Save books and their pre-order dates.
-- Track upcoming book releases.
-- Mark books as ordered or not ordered.
+- Save books with their pre-order dates and store links.
+- Automatically fill in the book title and URL from the active browser tab.
+- Track book statuses: Saved, Preordered, and Completed.
 - Edit and delete saved books.
 - Sort books by upcoming pre-order dates.
-- Receive browser notifications when pre-orders become available.
 - Store book data locally using Chrome Storage API.
 
 ## Tech Stack
@@ -27,7 +26,7 @@ Built with React, TypeScript, Vite, and Chrome Extensions API (Manifest V3).
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/tetianashcherbyna/book-radar.git
+   git clone https://github.com/TetianaShch/book-radar
    ```
 
 2. Navigate to the project directory:
@@ -59,17 +58,19 @@ Built with React, TypeScript, Vite, and Chrome Extensions API (Manifest V3).
 
 **MVP 1.0 — In Development**
 
-The initial React, TypeScript, and Manifest V3 setup is complete. The extension can be loaded into Chrome and displays a basic popup.
+The core functionality is implemented, including adding, editing, deleting, and sorting books, managing book statuses, and local data storage.
+
+The next steps are implementing Chrome notifications, completing final testing, and preparing the extension for publication in the Chrome Web Store.
 
 ## Roadmap
 
 - [x] Initialize React + TypeScript + Vite
 - [x] Configure Manifest V3
 - [x] Load extension into Chrome
-- [ ] Implement book data types and local storage
-- [ ] Build popup interface
-- [ ] Implement CRUD operations
-- [ ] Add sorting and order status
+- [x] Implement book data types and local storage
+- [x] Build popup interface
+- [x] Implement CRUD operations
+- [x] Add sorting and book statuses
 - [ ] Implement notifications
 - [ ] Test and prepare for release
 
