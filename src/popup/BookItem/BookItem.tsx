@@ -31,7 +31,10 @@ function BookItem({ book, onDelete, onUpdate }: BookItemProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleDelete = async () => {
-    await deleteBookPreorder(book.id);
+    const isDeleted = await deleteBookPreorder(book.id);
+    if (!isDeleted) {
+      return alert("Помилка при видаленні книжки. Спробуйте ще раз.");
+    }
     setIsDeleteModalOpen(false);
     onDelete();
   };
