@@ -5,7 +5,7 @@ export async function getBookPreorders(): Promise<BookPreorder[]> {
     return (result.bookPreorders as BookPreorder[] | undefined) ?? [];
 }
 
-export async function saveBookPreorder(book: BookPreorder): Promise<boolean> {
+export async function saveBookPreorder(book: BookPreorder): Promise<"success" | "duplicate" | "error"> {
 
     try {
         const bookPreorders = await getBookPreorders();
@@ -14,15 +14,15 @@ export async function saveBookPreorder(book: BookPreorder): Promise<boolean> {
                 (b) => b.id === book.id || (book.url && b.url === book.url)
             )
         ) {
-            return false;
+            return "duplicate";
         }
         bookPreorders.push(book);
         await chrome.storage.local.set({ bookPreorders });
-        return true;
+        return "success";
     }
     catch (error) {
         console.error('Error saving book preorder:', error);
-        return false;
+        return "error";
     }
 }
 

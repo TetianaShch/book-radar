@@ -35,6 +35,7 @@ function BookForm({ onSave }: BookFormProps) {
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorMessage("");
     const newBook: BookPreorder = {
       id: crypto.randomUUID(),
       title: title.trim(),
@@ -44,14 +45,16 @@ function BookForm({ onSave }: BookFormProps) {
       createdAt: new Date().toISOString(),
       status: "saved",
     };
-    const success = await saveBookPreorder(newBook);
-    if (success) {
+    const result = await saveBookPreorder(newBook);
+    if (result === "success") {
       setTitle("");
       setAuthor("");
       setPreorderDate("");
       onSave();
-    } else {
+    } else if (result === "duplicate") {
       setErrorMessage("Ця книга вже збережена");
+    } else {
+      setErrorMessage("Помилка при збереженні книги. Спробуйте ще раз.");
     }
   };
 
