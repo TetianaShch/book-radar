@@ -5,6 +5,32 @@ export async function getBookPreorders(): Promise<BookPreorder[]> {
     return (result.bookPreorders as BookPreorder[] | undefined) ?? [];
 }
 
+export async function getBookImage(): Promise<string | null> {
+    const [tab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+    });
+    if (!tab?.id) {
+        return null;
+    }
+    try {
+        const results = await chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: () => {
+                const imageMeta = document.querySelector<HTMLMetaElement>(
+                    'meta[property="og:image"]'
+                );
+                return imageMeta?.content || null;
+            },
+        });
+        return results[0]?.result ?? null;
+    }
+    catch (error) {
+        console.error('Error getting book image:', error);
+        return null;
+    }
+}
+
 export async function saveBookPreorder(book: BookPreorder): Promise<"success" | "duplicate" | "error"> {
 
     try {
