@@ -1,4 +1,5 @@
 import type { BookPreorder } from '../types/bookPreorder';
+import { cancelBookReminders, scheduleBookReminders } from "./reminders";
 
 export async function getBookPreorders(): Promise<BookPreorder[]> {
     const result = await chrome.storage.local.get('bookPreorders');
@@ -60,6 +61,7 @@ export async function deleteBookPreorder(bookID: string): Promise<boolean> {
             return false;
         }
         await chrome.storage.local.set({ bookPreorders: updatedBookPreorders });
+        await cancelBookReminders(bookID);
         return true;
     }
     catch (error) {
@@ -78,6 +80,10 @@ export async function updateBookPreorder(book: BookPreorder): Promise<boolean> {
 
         bookPreorders[index] = book;
         await chrome.storage.local.set({ bookPreorders });
+        await cancelBookReminders(book.id);
+        if (book.preorderDate && book.status === "saved") {
+            await scheduleBookReminders(book.id, book.preorderDate);
+        }
         return true;
     }
     catch (error) {
