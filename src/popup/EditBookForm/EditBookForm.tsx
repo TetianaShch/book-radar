@@ -34,6 +34,8 @@ function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
     if (success) {
       onClose();
       onUpdate(updatedBook);
+    } else {
+      alert("Помилка при оновленні книги. Спробуйте ще раз.");
     }
   };
 
