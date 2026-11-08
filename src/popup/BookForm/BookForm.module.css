@@ -4,28 +4,8 @@
   gap: 12px;
 }
 
-.app-title {
-  margin: 0 0 20px;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-text);
-}
-
 .label {
   font-weight: 500;
-}
-
-.checkboxLabel {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.checkbox {
-  margin: 0;
-  accent-color: var(--color-primary);
 }
 
 .input {

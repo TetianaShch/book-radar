@@ -25,6 +25,10 @@
   gap: 16px;
 }
 
+.modalContent h2 {
+  margin: 0;
+}
+
 .closeButton {
   position: absolute;
   top: 12px;
