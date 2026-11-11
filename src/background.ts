@@ -1,10 +1,6 @@
 import { getBookPreorders } from "./services/storage";
 
-console.log("BookRadar service worker started");
-
-
 chrome.alarms.onAlarm.addListener(async (alarm) => {
-    console.log("Alarm triggered:", alarm.name);
     const match = alarm.name.match(/^preorder-(.+)-(morning|evening)$/);
 
     if (!match) return;
@@ -12,13 +8,12 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
     const books = await getBookPreorders();
     const book = books.find((b) => b.id === bookId);
     if (!book || book.status !== "saved") return;
-    const notificationId = await chrome.notifications.create({
+    await chrome.notifications.create({
         type: "basic",
         iconUrl: "icon-128.png",
         title: "BookRadar",
         message: `Сьогодні очікується вихід книжки «${book.title}»! Перевірте її наявність у магазині.`
     });
-    console.log("Notification created:", notificationId);
 });
 
 
