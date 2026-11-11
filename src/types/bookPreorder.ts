@@ -4,6 +4,7 @@ export interface BookPreorder {
     title: string;
     author: string;
     preorderDate: string | null;
+    releaseDate: string | null;
     status: "saved" | "preordered" | "completed";
     url: string;
     createdAt: string;

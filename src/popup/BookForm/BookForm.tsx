@@ -13,6 +13,7 @@ function BookForm({ onSave }: BookFormProps) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [preorderDate, setPreorderDate] = useState("");
+  const [releaseDate, setReleaseDate] = useState("");
   const [url, setUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -45,6 +46,7 @@ function BookForm({ onSave }: BookFormProps) {
       title: title.trim(),
       author: author.trim(),
       preorderDate: preorderDate || null,
+      releaseDate: releaseDate || null,
       url: url.trim(),
       createdAt: new Date().toISOString(),
       status: "saved",
@@ -53,12 +55,13 @@ function BookForm({ onSave }: BookFormProps) {
 
     const result = await saveBookPreorder(newBook);
     if (result === "success") {
-      if (newBook.preorderDate && newBook.status === "saved") {
-        await scheduleBookReminders(newBook.id, newBook.preorderDate);
+      if (newBook.releaseDate && newBook.status === "saved") {
+        await scheduleBookReminders(newBook.id, newBook.releaseDate);
       }
       setTitle("");
       setAuthor("");
       setPreorderDate("");
+      setReleaseDate("");
       onSave();
     } else if (result === "duplicate") {
       setErrorMessage("Ця книга вже збережена");
@@ -104,6 +107,17 @@ function BookForm({ onSave }: BookFormProps) {
         name="preorderDate"
         value={preorderDate}
         onChange={(e) => setPreorderDate(e.target.value)}
+      />
+      <label className={css.label} htmlFor="releaseDate">
+        Дата виходу книжки (завершення передзамовлення)
+      </label>
+      <input
+        className={css.input}
+        type="date"
+        id="releaseDate"
+        name="releaseDate"
+        value={releaseDate}
+        onChange={(e) => setReleaseDate(e.target.value)}
       />
 
       <label className={css.label} htmlFor="url">

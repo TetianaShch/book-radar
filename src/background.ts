@@ -16,7 +16,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
         type: "basic",
         iconUrl: "icon-128.png",
         title: "BookRadar",
-        message: `Сьогодні починається передзамовлення: ${book.title}`,
+        message: `Сьогодні очікується вихід книжки «${book.title}»! Перевірте її наявність у магазині.`
     });
     console.log("Notification created:", notificationId);
 });

@@ -15,6 +15,7 @@ function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
   const [author, setAuthor] = useState(book.author);
   const [url, setUrl] = useState(book.url || "");
   const [preorderDate, setPreorderDate] = useState(book.preorderDate || "");
+  const [releaseDate, setReleaseDate] = useState(book.releaseDate || "");
   const [status, setStatus] = useState<BookPreorder["status"]>(book.status);
 
   const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
@@ -26,6 +27,7 @@ function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
       author,
       url,
       preorderDate: preorderDate || null,
+      releaseDate: releaseDate || null,
       status,
     };
 
@@ -68,6 +70,17 @@ function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
         type="date"
         value={preorderDate}
         onChange={(e) => setPreorderDate(e.target.value)}
+      />
+      <label className={css.label} htmlFor="releaseDate">
+        Дата виходу книжки (завершення передзамовлення)
+      </label>
+      <input
+        className={css.input}
+        type="date"
+        id="releaseDate"
+        name="releaseDate"
+        value={releaseDate}
+        onChange={(e) => setReleaseDate(e.target.value)}
       />
       <label htmlFor="status">Статус</label>
       <select

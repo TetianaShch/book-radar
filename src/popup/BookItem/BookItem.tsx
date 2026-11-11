@@ -26,6 +26,9 @@ function BookItem({ book, onDelete, onUpdate }: BookItemProps) {
   const formattedDate = book.preorderDate
     ? book.preorderDate.split("-").reverse().join(".")
     : null;
+  const formattedReleaseDate = book.releaseDate
+    ? book.releaseDate.split("-").reverse().join(".")
+    : null;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -62,7 +65,13 @@ function BookItem({ book, onDelete, onUpdate }: BookItemProps) {
       {book.preorderDate && (
         <div className={css.date}>
           <img src={calendarIcon} alt="" />
-          <span>Передзамовлення до {formattedDate}</span>
+          <span>Передзамовлення: {formattedDate}</span>
+        </div>
+      )}
+      {book.releaseDate && (
+        <div className={css.date}>
+          <img src={calendarIcon} alt="" />
+          <span>Очікується: {formattedReleaseDate}</span>
         </div>
       )}
       <div className={css.actions}>

@@ -81,8 +81,8 @@ export async function updateBookPreorder(book: BookPreorder): Promise<boolean> {
         bookPreorders[index] = book;
         await chrome.storage.local.set({ bookPreorders });
         await cancelBookReminders(book.id);
-        if (book.preorderDate && book.status === "saved") {
-            await scheduleBookReminders(book.id, book.preorderDate);
+        if (book.releaseDate && book.status === "saved") {
+            await scheduleBookReminders(book.id, book.releaseDate);
         }
         return true;
     }
