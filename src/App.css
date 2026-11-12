@@ -2,27 +2,51 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   margin-bottom: 20px;
 }
 
 .title {
   margin: 0;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--color-text);
 }
 
 .saved-button {
-  padding: 8px 12px;
+  padding: 9px 16px;
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--radius-pill);
   background-color: var(--color-primary-soft);
   color: var(--color-primary);
   font: inherit;
   font-size: 0.875rem;
+  font-weight: 700;
   cursor: pointer;
+
+  transition:
+    background-color var(--transition-ui),
+    box-shadow var(--transition-ui),
+    transform var(--transition-ui);
 }
 
 .saved-button:hover {
   background-color: var(--color-primary-soft-hover);
+  box-shadow: 0 3px 10px rgb(114 47 70 / 10%);
+}
+
+.saved-button:active {
+  transform: scale(0.97);
+}
+
+.saved-button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saved-button {
+    transition: none;
+  }
 }

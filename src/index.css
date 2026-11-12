@@ -1,5 +1,5 @@
 :root {
-  --font-body: "Inter", sans-serif;
+  --font-body: "Nunito Sans", sans-serif;
 
   --color-text: #29232a;
   --color-muted: #746b72;
@@ -11,6 +11,15 @@
   --color-primary-hover: #5b2338;
   --color-primary-soft: #f5e7eb;
   --color-primary-soft-hover: #ecd5dd;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --glass-surface: rgb(255 255 255 / 78%);
+  --glass-border: rgb(255 255 255 / 65%);
+  --glass-blur: blur(12px);
+
+  --transition-ui: 180ms ease;
 }
 
 * {
