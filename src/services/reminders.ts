@@ -1,17 +1,21 @@
+import type { ReminderSettings } from "../types/reminderSettings";
+
 export async function scheduleBookReminders(
     bookId: string,
-    preorderDate: string
+    releaseDate: string,
+    settings: ReminderSettings
 ): Promise<void> {
     await cancelBookReminders(bookId);
-    const morningReminder = new Date(`${preorderDate}T09:00:00`);
-    const eveningReminder = new Date(`${preorderDate}T17:00:00`);
+    if (!settings.enabled) return;
+    const morningReminder = new Date(`${releaseDate}T${settings.morningTime}:00`);
+    const eveningReminder = new Date(`${releaseDate}T${settings.eveningTime}:00`);
 
     if (morningReminder.getTime() > Date.now()) {
         await chrome.alarms.create(`preorder-${bookId}-morning`, {
             when: morningReminder.getTime(),
         });
     }
-    if (eveningReminder.getTime() > Date.now()) {
+    if (settings.eveningEnabled && eveningReminder.getTime() > Date.now()) {
         await chrome.alarms.create(`preorder-${bookId}-evening`, {
             when: eveningReminder.getTime(),
         });

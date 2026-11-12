@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { SubmitEvent } from "react";
 import type { BookPreorder } from "../../types/bookPreorder";
 import { saveBookPreorder, getBookImage } from "../../services/storage";
+import { getReminderSettings } from "../../services/settings";
 import { scheduleBookReminders } from "../../services/reminders";
 import css from "./BookForm.module.css";
 
@@ -55,8 +56,9 @@ function BookForm({ onSave }: BookFormProps) {
 
     const result = await saveBookPreorder(newBook);
     if (result === "success") {
-      if (newBook.releaseDate && newBook.status === "saved") {
-        await scheduleBookReminders(newBook.id, newBook.releaseDate);
+      if (newBook.releaseDate && newBook.status !== "completed") {
+        const settings = await getReminderSettings();
+        await scheduleBookReminders(newBook.id, newBook.releaseDate, settings);
       }
       setTitle("");
       setAuthor("");
