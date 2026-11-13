@@ -38,7 +38,7 @@
   padding: 4px 8px;
   background-color: var(--color-border);
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .date {
@@ -76,6 +76,11 @@
 .actions button:hover {
   background-color: var(--color-border);
   border-radius: 8px;
+}
+
+.actions button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .actions img {
