@@ -89,3 +89,15 @@
   width: 22px;
   height: 22px;
 }
+
+.searchButton:hover,
+.filterButton:hover {
+  background-color: var(--color-primary-soft);
+  border-radius: 8px;
+}
+
+.searchButton:focus-visible,
+.filterButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
