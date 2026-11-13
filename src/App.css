@@ -45,6 +45,28 @@
   outline-offset: 3px;
 }
 
+.reminderButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.reminderButton:hover {
+  background-color: var(--color-primary-soft);
+}
+
+.reminderButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .saved-button {
     transition: none;

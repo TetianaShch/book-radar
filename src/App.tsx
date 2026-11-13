@@ -16,6 +16,7 @@ function App() {
         <h1 className="title">BookRadar</h1>
         {currentView === "list" && (
           <button
+            className="reminderButton"
             type="button"
             aria-label="Налаштування нагадувань"
             onClick={() => setIsReminderOpen(true)}
