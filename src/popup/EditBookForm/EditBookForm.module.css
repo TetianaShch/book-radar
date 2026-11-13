@@ -5,7 +5,7 @@
 }
 
 .form label {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-text);
 }
@@ -23,7 +23,6 @@
 
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  box-sizing: border-box;
 }
 
 .form input:focus,
@@ -36,7 +35,6 @@
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  margin-top: 0px;
 }
 
 .actions button {
@@ -45,7 +43,7 @@
   border: 1px solid var(--color-border);
   border-radius: 8px;
   font: inherit;
-  font-size: 14px;
+  font-size: 0.875rem;
   cursor: pointer;
 }
 

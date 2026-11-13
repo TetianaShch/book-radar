@@ -71,11 +71,8 @@ function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
         value={preorderDate}
         onChange={(e) => setPreorderDate(e.target.value)}
       />
-      <label className={css.label} htmlFor="releaseDate">
-        Дата виходу книжки (завершення передзамовлення)
-      </label>
+      <label htmlFor="releaseDate">Очікуємо випуск</label>
       <input
-        className={css.input}
         type="date"
         id="releaseDate"
         name="releaseDate"
