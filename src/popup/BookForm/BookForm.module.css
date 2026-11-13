@@ -11,17 +11,16 @@
 
 .input {
   width: 100%;
-  box-sizing: border-box;
   padding: 12px 14px;
   border: 1px solid var(--color-border);
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   background-color: var(--color-surface);
   color: var(--color-text);
   font: inherit;
   transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    background-color 180ms ease;
+    background-color var(--transition-ui),
+    transform var(--transition-ui),
+    box-shadow var(--transition-ui);
 }
 
 .input:hover {
@@ -40,14 +39,14 @@
   background-color: var(--color-primary);
   color: var(--color-surface);
   border: none;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   font: inherit;
   font-weight: 600;
   cursor: pointer;
   transition:
-    background-color 180ms ease,
-    transform 180ms ease,
-    box-shadow 180ms ease;
+    border-color var(--transition-ui),
+    box-shadow var(--transition-ui),
+    background-color var(--transition-ui);
 }
 
 .button:hover {
@@ -63,6 +62,11 @@
 .button:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 3px;
+}
+
+.errorMessage {
+  color: var(--color-primary);
+  font-size: 0.875rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
