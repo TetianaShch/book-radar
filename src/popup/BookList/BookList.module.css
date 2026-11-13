@@ -7,42 +7,6 @@
   list-style: none;
 }
 
-.item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 16px;
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  color: var(--color-text);
-  font-weight: 500;
-}
-
-.item:hover {
-  border-color: var(--color-primary);
-}
-.bookTitle {
-  flex: 1;
-  min-width: 0;
-}
-
-.bookStatus {
-  flex-shrink: 0;
-  margin-left: 12px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  background-color: var(--color-border);
-  color: var(--color-primary);
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.count {
-  margin: 0 0 16px;
-  font-size: 0.875rem;
-  color: var(--color-muted);
-}
 .backButton {
   padding: 0;
   margin-bottom: 0px;
@@ -73,14 +37,12 @@
   gap: 8px;
 }
 
-.statusSelect {
+.statusSelect,
+.searchInput {
   position: absolute;
   top: 50%;
-  right: 40%;
   width: 260px;
-  transform: translateY(-50%);
   z-index: 10;
-  box-sizing: border-box;
   padding: 8px 16px;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -89,7 +51,18 @@
   font: inherit;
 }
 
-.statusSelect:focus {
+.statusSelect {
+  right: 40%;
+  transform: translateY(-50%);
+}
+
+.searchInput {
+  right: 80%;
+  transform: translateY(-60%);
+}
+
+.statusSelect:focus,
+.searchInput:focus {
   outline: 2px solid var(--color-primary);
   outline-offset: 1px;
 }
@@ -98,44 +71,7 @@
   position: relative;
 }
 
-.searchInput {
-  position: absolute;
-  top: 50%;
-  right: 80%;
-  width: 260px;
-  transform: translateY(-60%);
-  z-index: 10;
-  box-sizing: border-box;
-  padding: 8px 16px;
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  color: var(--color-text);
-  font: inherit;
-}
-
-.searchInput:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 1px;
-}
-
-.searchButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  padding: 6px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-.searchButton img {
-  width: 22px;
-  height: 22px;
-}
-
+.searchButton,
 .filterButton {
   display: flex;
   align-items: center;
@@ -148,6 +84,7 @@
   cursor: pointer;
 }
 
+.searchButton img,
 .filterButton img {
   width: 22px;
   height: 22px;
