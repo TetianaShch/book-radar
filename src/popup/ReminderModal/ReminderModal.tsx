@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ReminderSettings } from "../../types/reminderSettings";
 import { syncReminders } from "../../services/syncReminders";
+import CloseButton from "../CloseButton/CloseButton";
 import {
   defaultSettings,
   getReminderSettings,
@@ -44,6 +45,7 @@ export function ReminderModal({ isOpen, onClose }: ReminderModalProps) {
         aria-modal="true"
         aria-labelledby="reminder-title"
       >
+        <CloseButton onClose={onClose} />
         <h2 id="reminder-title" className={css.title}>
           Нагадування
         </h2>
