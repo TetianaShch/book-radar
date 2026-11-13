@@ -57,3 +57,16 @@
   background-color: var(--color-surface);
   color: var(--color-text);
 }
+
+.actions button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.actions button[type="submit"]:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.actions button[type="button"]:hover {
+  background-color: var(--color-primary-soft);
+}
