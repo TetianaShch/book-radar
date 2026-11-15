@@ -8,7 +8,7 @@ Built with React, TypeScript, Vite, and Chrome Extensions API (Manifest V3).
 
 - Save books with titles, authors, pre-order dates, release dates, and store links.
 - Automatically fill in the book title and URL from the active browser tab.
-- Retrieve book cover images from supported websites.
+- Retrieve book cover images from the active page's Open Graph metadata when available.
 - Track book statuses: Saved, Preordered, and Completed.
 - Edit and delete saved books.
 - Search books by title and filter by status.
@@ -84,8 +84,15 @@ The extension is being prepared for publication in the Chrome Web Store.
 - [x] Implement configurable Chrome notifications
 - [x] Test core functionality and notifications
 - [x] Pass build and lint checks
-- [ ] Prepare Chrome Web Store assets and listing
-- [ ] Publish version 1.0
+- [x] Add privacy policy document
+- [x] Add extension icons
+- [x] Prepare Chrome Web Store listing screenshots
+- [ ] Submit version 1.0.0 for review
+- [ ] Publish after approval
+
+## Privacy Policy
+
+See [Privacy Policy](docs/privacy-policy.md).
 
 ## Author
 
