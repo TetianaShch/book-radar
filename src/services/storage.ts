@@ -25,12 +25,24 @@ export async function getBookImage(): Promise<string | null> {
                 return imageMeta?.content || null;
             },
         });
-        return results[0]?.result ?? null;
-    }
-    catch (error) {
-        console.error('Error getting book image:', error);
+        const imageUrl = results[0]?.result ?? null;
+
+        if (!imageUrl) return null;
+
+        const parsedUrl = new URL(imageUrl, tab.url);
+
+        if (
+            parsedUrl.protocol !== "https:" &&
+            parsedUrl.protocol !== "http:"
+        ) {
+            return null;
+        }
+
+        return parsedUrl.href;
+    } catch {
         return null;
     }
+
 }
 
 export async function saveBookPreorder(book: BookPreorder): Promise<"success" | "duplicate" | "error"> {
@@ -48,8 +60,7 @@ export async function saveBookPreorder(book: BookPreorder): Promise<"success" | 
         await chrome.storage.local.set({ bookPreorders });
         return "success";
     }
-    catch (error) {
-        console.error('Error saving book preorder:', error);
+    catch {
         return "error";
     }
 }
@@ -65,8 +76,7 @@ export async function deleteBookPreorder(bookID: string): Promise<boolean> {
         await cancelBookReminders(bookID);
         return true;
     }
-    catch (error) {
-        console.error('Error deleting book preorder:', error);
+    catch {
         return false;
     }
 }
@@ -93,8 +103,7 @@ export async function updateBookPreorder(book: BookPreorder): Promise<boolean> {
         }
         return true;
     }
-    catch (error) {
-        console.error('Error updating book preorder:', error);
+    catch {
         return false;
     }
 }
