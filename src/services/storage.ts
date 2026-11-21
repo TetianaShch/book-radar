@@ -22,7 +22,13 @@ export async function getBookImage(): Promise<string | null> {
                 const imageMeta = document.querySelector<HTMLMetaElement>(
                     'meta[property="og:image"]'
                 );
-                return imageMeta?.content || null;
+                if (imageMeta?.content) return imageMeta.content;
+
+                const coverImage = document.querySelector<HTMLImageElement>(
+                    'img[itemprop="image"][data-src]'
+                );
+
+                return coverImage?.getAttribute("data-src") || null;
             },
         });
         const imageUrl = results[0]?.result ?? null;
