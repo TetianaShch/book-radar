@@ -10,6 +10,23 @@ type EditBookFormProps = {
   onUpdate: (updatedBook: BookPreorder) => void;
 };
 
+function readCoverFile(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        resolve(reader.result);
+      } else {
+        reject(new Error("Не вдалося прочитати обкладинку"));
+      }
+    };
+
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
 function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
@@ -20,12 +37,23 @@ function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
   const [preorderPrice, setPreorderPrice] = useState(
     book.preorderPrice?.toString() ?? "",
   );
+  const [customCover, setCustomCover] = useState<File | null>(null);
 
   const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
+    let imgUrl = book.imgUrl;
 
+    if (customCover) {
+      try {
+        imgUrl = await readCoverFile(customCover);
+      } catch {
+        alert("Не вдалося прочитати обкладинку. Спробуй вибрати інший файл.");
+        return;
+      }
+    }
     const updatedBook: BookPreorder = {
       ...book,
+      imgUrl,
       title,
       author,
       url,
@@ -67,6 +95,13 @@ function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
         type="url"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
+      />
+      <label htmlFor="customCover">Завантажити власну обкладинку</label>
+      <input
+        id="customCover"
+        type="file"
+        accept="image/*"
+        onChange={(e) => setCustomCover(e.target.files?.[0] ?? null)}
       />
       <label htmlFor="preorderDate">Передзамовлення діє до</label>
       <input

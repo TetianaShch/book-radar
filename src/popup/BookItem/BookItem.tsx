@@ -32,6 +32,8 @@ function BookItem({ book, onDelete, onUpdate }: BookItemProps) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [failedCoverUrl, setFailedCoverUrl] = useState<string | null>(null);
+  const coverUrl = book.imgUrl;
 
   const handleDelete = async () => {
     const isDeleted = await deleteBookPreorder(book.id);
@@ -46,12 +48,17 @@ function BookItem({ book, onDelete, onUpdate }: BookItemProps) {
     <li className={css.item}>
       <div className={css.header}>
         <div className={css.bookInfo}>
-          {book.imgUrl && (
+          {coverUrl && coverUrl !== failedCoverUrl ? (
             <img
               className={css.bookCover}
-              src={book.imgUrl}
+              src={coverUrl}
               alt={`Обкладинка ${book.title}`}
+              onError={() => setFailedCoverUrl(coverUrl)}
             />
+          ) : (
+            <div className={`${css.bookCover} ${css.coverPlaceholder}`}>
+              Без обкладинки
+            </div>
           )}
           <div className={css.bookDetails}>
             <h3>{book.title}</h3>

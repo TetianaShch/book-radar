@@ -110,3 +110,13 @@
   border-color: var(--color-primary);
   color: #fff;
 }
+
+.coverPlaceholder {
+  display: grid;
+  place-items: center;
+  padding: 6px;
+  background: #f5e7eb;
+  color: #722f46;
+  font-size: 11px;
+  text-align: center;
+}
