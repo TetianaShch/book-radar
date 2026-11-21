@@ -17,6 +17,9 @@ function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
   const [preorderDate, setPreorderDate] = useState(book.preorderDate || "");
   const [releaseDate, setReleaseDate] = useState(book.releaseDate || "");
   const [status, setStatus] = useState<BookPreorder["status"]>(book.status);
+  const [preorderPrice, setPreorderPrice] = useState(
+    book.preorderPrice?.toString() ?? "",
+  );
 
   const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,6 +32,7 @@ function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
       preorderDate: preorderDate || null,
       releaseDate: releaseDate || null,
       status,
+      preorderPrice: preorderPrice === "" ? undefined : Number(preorderPrice),
     };
 
     const success = await updateBookPreorder(updatedBook);
@@ -89,6 +93,19 @@ function EditBookForm({ book, onClose, onUpdate }: EditBookFormProps) {
         <option value="preordered">Передзамовлено</option>
         <option value="completed">Отримано</option>
       </select>
+      {status === "preordered" && (
+        <>
+          <label htmlFor="preorderPrice">Ціна передзамовлення, грн</label>
+          <input
+            id="preorderPrice"
+            type="number"
+            min="0"
+            step="0.01"
+            value={preorderPrice}
+            onChange={(event) => setPreorderPrice(event.target.value)}
+          />
+        </>
+      )}
       <div className={css.actions}>
         <button type="submit">Зберегти</button>
         <button type="button" onClick={onClose}>

@@ -8,6 +8,7 @@ export interface BookPreorder {
     status: "saved" | "preordered" | "completed";
     url: string;
     createdAt: string;
+    preorderPrice?: number;
 }
 
 

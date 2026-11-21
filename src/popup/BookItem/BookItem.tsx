@@ -59,7 +59,13 @@ function BookItem({ book, onDelete, onUpdate }: BookItemProps) {
           </div>
         </div>
 
-        <span className={css.status}>{statusLabels[book.status]}</span>
+        <span className={css.status}>
+          {statusLabels[book.status]}
+          {book.status === "preordered" &&
+          typeof book.preorderPrice === "number"
+            ? ` за ${book.preorderPrice.toLocaleString("uk-UA")} грн`
+            : ""}
+        </span>
       </div>
 
       {book.preorderDate && (
