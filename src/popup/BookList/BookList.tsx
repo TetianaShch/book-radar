@@ -38,10 +38,14 @@ function BookList({ onBack }: BookListProps) {
   });
 
   const sortedBooks = [...filteredBooks].sort((a, b) => {
-    if (!a.preorderDate && !b.preorderDate) return 0;
-    if (!a.preorderDate) return 1;
-    if (!b.preorderDate) return -1;
-    return a.preorderDate.localeCompare(b.preorderDate);
+    const aDate = a.preorderDate || a.releaseDate;
+    const bDate = b.preorderDate || b.releaseDate;
+
+    if (!aDate && !bDate) return 0;
+    if (!aDate) return 1;
+    if (!bDate) return -1;
+
+    return aDate.localeCompare(bDate);
   });
 
   return (
