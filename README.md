@@ -2,6 +2,8 @@
 
 **BookRadar** is a Chrome extension that helps readers organize book pre-orders, track release dates, and receive timely reminders.
 
+[Install BookRadar from the Chrome Web Store](https://chromewebstore.google.com/detail/bookradar/lfagoeciddiceojmiijflmdommhgfndd)
+
 Built with React, TypeScript, Vite, and Chrome Extensions API (Manifest V3).
 
 ## Features
@@ -17,6 +19,14 @@ Built with React, TypeScript, Vite, and Chrome Extensions API (Manifest V3).
 - Receive Chrome notifications based on book release dates, even when the popup is closed.
 - Enable or disable reminders and customize morning and evening notification times.
 - Store books and reminder settings locally using Chrome Storage API.
+
+## What's New in v1.1.0
+
+- Save the price you paid for a pre-order and see it next to the Preordered status.
+- Books without a pre-order date are now sorted by release date.
+- Upload your own cover when editing a saved book.
+- A placeholder appears when a cover is missing or fails to load.
+- BookRadar can now automatically find covers on more book pages.
 
 ## Tech Stack
 
@@ -64,11 +74,7 @@ Built with React, TypeScript, Vite, and Chrome Extensions API (Manifest V3).
 
 ## Project Status
 
-**MVP 1.0 — Release Preparation**
-
-The core functionality is implemented and has passed initial manual testing, including book management, search, filtering, local storage, and Chrome notifications.
-
-The extension is being prepared for publication in the Chrome Web Store.
+BookRadar 1.1.0 has been submitted for Chrome Web Store review. Version 1.0.0 is currently available to install.
 
 ## Roadmap
 
@@ -87,8 +93,7 @@ The extension is being prepared for publication in the Chrome Web Store.
 - [x] Add privacy policy document
 - [x] Add extension icons
 - [x] Prepare Chrome Web Store listing screenshots
-- [ ] Submit version 1.0.0 for review
-- [ ] Publish after approval
+- [x] Publish BookRadar 1.0.0 in the Chrome Web Store
 
 ## Privacy Policy
 
